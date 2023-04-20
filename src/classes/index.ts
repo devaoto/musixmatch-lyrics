@@ -1,0 +1,1 @@
+export { MusixmatchAPI } from "./musixmatch";
