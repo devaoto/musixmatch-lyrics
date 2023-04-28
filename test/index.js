@@ -1,9 +1,11 @@
-const { MusixmatchAPI } = require("../dist");
+const { MusixmatchAPI, APILatency } = require("../dist");
 const mxm = new MusixmatchAPI("APIKey");
 
-mxm.trackInfo(90, 1).then((l) => {
-  console.log(l.explicit);
-});
+async function lat() {
+  console.log(await APILatency());
+}
+
+lat();
 
 // mxm.getLyricsByNames("FiZ", "On The Low").then((lyrics) => {
 // if (mxm.hasLyrics("FiZ", "On The Low")) {
