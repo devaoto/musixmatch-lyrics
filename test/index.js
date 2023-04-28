@@ -1,12 +1,20 @@
 const { MusixmatchAPI } = require("../dist");
-const mxm = new MusixmatchAPI("18d9fbcac52e279a77b616137280b1eb");
+const mxm = new MusixmatchAPI("APIKey");
 
-mxm.getLyricsByNames(10, "On The Low").then((lyrics) => {
-  console.log(
-    lyrics.lyrics_body,
-    "\n",
-    "ID: " + lyrics.lyrics_id,
-    "\n",
-    lyrics.lyrics_copyright
-  );
+mxm.trackInfo(90, 1).then((l) => {
+  console.log(l.explicit);
 });
+
+// mxm.getLyricsByNames("FiZ", "On The Low").then((lyrics) => {
+// if (mxm.hasLyrics("FiZ", "On The Low")) {
+//   console.log(
+//     lyrics.lyrics_body,
+//     "\n",
+//     "ID: " + lyrics.lyrics_id,
+//     "\n",
+//     lyrics.lyrics_copyright
+//   );
+// } else {
+//   console.log("Lyrics Not Available.");
+// }
+// });
