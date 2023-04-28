@@ -1,15 +1,18 @@
-import { MusixmatchString } from "./rawDataTypes";
+import { GetLyrics, SubtitleInt, TrackInfo } from "../interfaces";
+import { MusixmatchBoolean, MusixmatchString } from "./rawDataTypes";
 
-type LyricsReturnType = Promise<MusixmatchString>;
+type LyricsReturnType = Promise<GetLyrics>;
 type TrackIDReturnType = Promise<MusixmatchString>;
-type MacroLyricsReturnType = Promise<MusixmatchString>;
-type SubtitleReturnType = Promise<MusixmatchString>;
+type SubtitleReturnType = Promise<SubtitleInt>;
 type TranslationReturnType = Promise<MusixmatchString>;
+type TrackInfoRetrunType = Promise<TrackInfo>;
+type HasLyricsReturnType = Promise<MusixmatchBoolean>;
 
 export {
   LyricsReturnType,
   TrackIDReturnType,
-  MacroLyricsReturnType,
   SubtitleReturnType,
   TranslationReturnType,
+  TrackInfoRetrunType,
+  HasLyricsReturnType,
 };

@@ -1,8 +1,9 @@
 export { ArtistNameType, SongNameType, TrackIDType } from "./paramTypes";
 export {
+  HasLyricsReturnType,
   LyricsReturnType,
-  MacroLyricsReturnType,
   SubtitleReturnType,
   TrackIDReturnType,
+  TrackInfoRetrunType,
   TranslationReturnType,
 } from "./returnTypes";
