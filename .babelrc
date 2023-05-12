@@ -4,11 +4,13 @@
       "@babel/preset-env",
       {
         "targets": {
-          "browsers": ["ie >= 10"]
-        }
+          "esmodules": false,
+          "browsers": ["ie >= 8"]
+        },
+        "useBuiltIns": "usage",
+        "corejs": 3
       }
-    ],
-    "@babel/preset-typescript"
+    ]
   ],
   "plugins": ["@babel/plugin-transform-runtime"]
 }
