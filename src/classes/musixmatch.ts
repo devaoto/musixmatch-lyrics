@@ -901,6 +901,7 @@ class MusixmatchAPI {
           "instead."
         );
       }
+      lyricsBody[index] = lyricsLine.replace(/\n/g, "\n");
     });
     try {
       const response: AxiosResponse = await axios.post(
