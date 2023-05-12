@@ -916,6 +916,153 @@ class MusixmatchAPI {
       throw new MusixmatchError(e.message);
     }
   }
+
+  /**
+   *
+   * @param {TrackIDType} trackId The TrackID to get lyrics
+   * @returns {LyricsReturnType} Lyrics
+   *
+   * ! API Key Required
+   *
+   */
+
+  async matcherLyricsGet(
+    identifier:
+      | TrackIDType
+      | { artistName: ArtistNameType; trackName: TrackNameType }
+  ): LyricsReturnType {
+    if (typeof identifier === "string") {
+      const trackId = identifier;
+      if (typeof trackId !== "string") {
+        throw new MusixmatchTypeError(
+          `Expected Type to be "string" but got ${typeof trackId} instead.`
+        );
+      }
+
+      try {
+        const response: AxiosResponse = await axios.get(
+          `https://api.musixmatch.com/ws/1.1/matcher.lyrics.get?track_id=${trackId}&apikey=${this.apiKey}`
+        );
+
+        if (response.status === 200) {
+          const lyrics: any = response.data.message.body.lyrics;
+          return lyrics;
+        } else {
+          throw new MusixmatchError(this.handleStatusCode(response.status));
+        }
+      } catch (error: any) {
+        throw new MusixmatchError(error.message);
+      }
+    } else {
+      const { artistName, trackName } = identifier;
+      if (typeof artistName !== "string" || typeof trackName !== "string") {
+        throw new MusixmatchTypeError(
+          `Expected artistName and trackName to be of type "string" but got ${typeof artistName} and ${typeof trackName} instead.`
+        );
+      }
+      try {
+        const response: AxiosResponse = await axios.get(
+          `https://api.musixmatch.com/ws/1.1/track.search?q_artist=${encodeURIComponent(
+            artistName
+          )}&q_track=${encodeURIComponent(trackName)}&apikey=${this.apiKey}`
+        );
+
+        if (response.status === 200) {
+          const trackId: string =
+            response.data.message.body.track_list[0].track.track_id;
+          const lyricsResponse: AxiosResponse = await axios.get(
+            `https://api.musixmatch.com/ws/1.1/matcher.lyrics.get?track_id=${trackId}&apikey=${this.apiKey}`
+          );
+
+          if (lyricsResponse.status === 200) {
+            const subtitles: any = lyricsResponse.data.message.body.lyrics;
+            return subtitles;
+          } else {
+            throw new MusixmatchError(
+              this.handleStatusCode(lyricsResponse.status)
+            );
+          }
+        } else {
+          throw new MusixmatchError(this.handleStatusCode(response.status));
+        }
+      } catch (error: any) {
+        throw new MusixmatchError(error.message);
+      }
+    }
+  }
+
+  /**
+   *
+   * @param {TrackIDType | {artistName: ArtistNameType, trackName: TrackNameType}} identifier
+   * @returns {SubtitleReturnType} subtitle
+   *
+   * Get synced lyrics using this function.
+   * ! Paid API Key is required.
+   */
+
+  async matcherSubtitlesGet(
+    identifier:
+      | TrackIDType
+      | { artistName: ArtistNameType; trackName: TrackNameType }
+  ): SubtitleReturnType {
+    if (typeof identifier === "string") {
+      const trackId = identifier;
+      if (typeof trackId !== "string") {
+        throw new MusixmatchTypeError(
+          `Expected Type to be "string" but got ${typeof trackId} instead.`
+        );
+      }
+      try {
+        const response: AxiosResponse = await axios.get(
+          `https://api.musixmatch.com/ws/1.1/matcher.subtitles.get?track_id=${trackId}&apikey=${this.apiKey}`
+        );
+
+        if (response.status === 200) {
+          const subtitles: any = response.data.message.body.subtitle;
+          return subtitles;
+        } else {
+          throw new MusixmatchError(this.handleStatusCode(response.status));
+        }
+      } catch (error: any) {
+        throw new MusixmatchError(error.message);
+      }
+    } else {
+      const { artistName, trackName } = identifier;
+      if (typeof artistName !== "string" || typeof trackName !== "string") {
+        throw new MusixmatchTypeError(
+          `Expected artistName and trackName to be of type "string" but got ${typeof artistName} and ${typeof trackName} instead.`
+        );
+      }
+      try {
+        const response: AxiosResponse = await axios.get(
+          `https://api.musixmatch.com/ws/1.1/track.search?q_artist=${encodeURIComponent(
+            artistName
+          )}&q_track=${encodeURIComponent(trackName)}&apikey=${this.apiKey}`
+        );
+
+        if (response.status === 200) {
+          const trackId: string =
+            response.data.message.body.track_list[0].track.track_id;
+          const subtitleResponse: AxiosResponse = await axios.get(
+            `https://api.musixmatch.com/ws/1.1/matcher.subtitles.get?track_id=${trackId}&apikey=${this.apiKey}`
+          );
+
+          if (subtitleResponse.status === 200) {
+            const subtitles: any = subtitleResponse.data.message.body.subtitle;
+            return subtitles;
+          } else {
+            throw new MusixmatchError(
+              this.handleStatusCode(subtitleResponse.status)
+            );
+          }
+        } else {
+          throw new MusixmatchError(this.handleStatusCode(response.status));
+        }
+      } catch (error: any) {
+        throw new MusixmatchError(error.message);
+      }
+    }
+  }
 }
 
 export { MusixmatchAPI };
