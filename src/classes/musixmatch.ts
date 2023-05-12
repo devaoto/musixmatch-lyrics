@@ -903,7 +903,7 @@ class MusixmatchAPI {
       }
     });
     try {
-      const response: AxiosResponse = await axios.get(
+      const response: AxiosResponse = await axios.post(
         `https://api.musixmatch.com/ws/1.1/track.lyrics.post?track_isrc=${ISRC}&lyrics_body=${lyricsBody}&apikey=${this.apiKey}`
       );
       if (response.status === 200) {
