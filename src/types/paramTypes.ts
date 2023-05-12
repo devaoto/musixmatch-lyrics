@@ -1,6 +1,6 @@
 import { MusixmatchString } from "./rawDataTypes";
 type TrackIDType = MusixmatchString;
 type ArtistNameType = MusixmatchString;
-type SongNameType = MusixmatchString;
+type TrackNameType = MusixmatchString;
 
-export { TrackIDType, ArtistNameType, SongNameType };
+export { TrackIDType, ArtistNameType, TrackNameType };
