@@ -8,4 +8,11 @@ interface GetLyrics {
   updated_time: string;
 }
 
-export { GetLyrics };
+const lyricsInt = () => {
+  console.log("JSON:\n");
+  console.log(
+    "lyrics_id: number;\nexplicit: number;\nlyrics_body: string;\nscript_tracking_url: string;\npixel_tracking_url: string;\nlyrics_copyright: string;\nupdated_time: string;"
+  );
+};
+
+export { GetLyrics, lyricsInt };
