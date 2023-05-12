@@ -1,4 +1,10 @@
-const { MusixmatchAPI, APILatency } = require("../dist");
+const {
+  MusixmatchAPI,
+  APILatency,
+  ModuleVersion,
+  APIVersion,
+  BaseAPIURL,
+} = require("../dist");
 const mxm = new MusixmatchAPI("APIKey");
 
 async function lat() {
