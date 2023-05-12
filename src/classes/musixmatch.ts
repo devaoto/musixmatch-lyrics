@@ -876,6 +876,45 @@ class MusixmatchAPI {
       throw new MusixmatchError("Invalid chart name", chartName);
     }
   }
+
+  /**
+   *
+   * @param commontrackId A valid commontrack_id
+   * @param ISRC A valid isrc
+   * @param lyricsBody The lyrics
+   *
+   * @returns {TrackLyricsPostType} Submits lyrics on Musixmatch.
+   */
+  async trackLyricsPost(ISRC: string, ...lyricsBody: string[]) {
+    if (typeof ISRC !== "string") {
+      throw new MusixmatchTypeError(
+        'Expected type to be "string" but got',
+        typeof ISRC,
+        "instead."
+      );
+    }
+    lyricsBody.forEach((lyricsLine, index) => {
+      if (typeof lyricsLine !== "string") {
+        throw new MusixmatchTypeError(
+          'Expected type to be "string" but got',
+          typeof lyricsLine,
+          "instead."
+        );
+      }
+    });
+    try {
+      const response: AxiosResponse = await axios.get(
+        `https://api.musixmatch.com/ws/1.1/track.lyrics.post?track_isrc=${ISRC}&lyrics_body=${lyricsBody}&apikey=${this.apiKey}`
+      );
+      if (response.status === 200) {
+        return "Lyrics Posted.";
+      } else {
+        throw new MusixmatchError(this.handleStatusCode(response.status));
+      }
+    } catch (e: any) {
+      throw new MusixmatchError(e.message);
+    }
+  }
 }
 
 export { MusixmatchAPI };
