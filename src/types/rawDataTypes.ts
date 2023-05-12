@@ -1,4 +1,5 @@
 type MusixmatchString = string;
 type MusixmatchBoolean = boolean;
+type MusixmatchNumber = number;
 
-export { MusixmatchBoolean, MusixmatchString };
+export { MusixmatchBoolean, MusixmatchString, MusixmatchNumber };
