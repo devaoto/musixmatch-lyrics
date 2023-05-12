@@ -1,9 +1,12 @@
-export { ArtistNameType, SongNameType, TrackIDType } from "./paramTypes";
+export { ArtistNameType, TrackIDType, TrackNameType } from "./paramTypes";
 export {
+  ChartArtistReturnType,
+  ChartTracksReturnType,
   HasLyricsReturnType,
   LyricsReturnType,
   SubtitleReturnType,
+  TrackGetReturnType,
   TrackIDReturnType,
-  TrackInfoRetrunType,
+  TrackSearchRetrunType,
   TranslationReturnType,
 } from "./returnTypes";
