@@ -763,7 +763,7 @@ class MusixmatchAPI {
         await axios.get(`https://api.musixmatch.com/ws/1.1/chart.artists.get?page=${page}&page_size=${pageSize}&country=${country}&apikey=${this.apiKey}
         `);
       if (response.status == 200) {
-        return response.data.body;
+        return response.data.message.body;
       } else {
         throw new MusixmatchError(this.handleStatusCode(response.status));
       }
@@ -826,7 +826,7 @@ class MusixmatchAPI {
           await axios.get(`https://api.musixmatch.com/ws/1.1/chart.tracks.get?page=${page}&page_size=${pageSize}&country=${country}&chart_name=hot&apikey=${this.apiKey}
           `);
         if (response.status == 200) {
-          return response.data.body;
+          return response.data.message.body;
         } else {
           throw new MusixmatchError(this.handleStatusCode(response.status));
         }
@@ -839,7 +839,7 @@ class MusixmatchAPI {
           await axios.get(`https://api.musixmatch.com/ws/1.1/chart.tracks.get?page=${page}&page_size=${pageSize}&country=${country}&chart_name=top&apikey=${this.apiKey}
           `);
         if (response.status == 200) {
-          return response.data.body;
+          return response.data.message.body;
         } else {
           throw new MusixmatchError(this.handleStatusCode(response.status));
         }
@@ -852,7 +852,7 @@ class MusixmatchAPI {
           await axios.get(`https://api.musixmatch.com/ws/1.1/chart.tracks.get?page=${page}&page_size=${pageSize}&country=${country}&chart_name=mxmweekly&apikey=${this.apiKey}
           `);
         if (response.status == 200) {
-          return response.data.body;
+          return response.data.message.body;
         } else {
           throw new MusixmatchError(this.handleStatusCode(response.status));
         }
@@ -865,7 +865,7 @@ class MusixmatchAPI {
           await axios.get(`https://api.musixmatch.com/ws/1.1/chart.tracks.get?page=${page}&page_size=${pageSize}&country=${country}&chart_name=mxmweekly_new&apikey=${this.apiKey}
           `);
         if (response.status == 200) {
-          return response.data.body;
+          return response.data.message.body;
         } else {
           throw new MusixmatchError(this.handleStatusCode(response.status));
         }
