@@ -19,10 +19,10 @@ import {
 import { MusixmatchError, MusixmatchTypeError } from "./errors";
 
 class MusixmatchAPI {
-  private apiKey: string;
+  private apiKey: string | undefined;
 
-  constructor(apiKey: string) {
-    if (typeof apiKey !== "string") {
+  constructor(apiKey?: string) {
+    if (typeof apiKey !== "undefined" && typeof apiKey !== "string") {
       throw new MusixmatchTypeError(
         `Expected Type to be "string" but got ${typeof apiKey} instead.`
       );
