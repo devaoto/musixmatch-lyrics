@@ -1,4 +1,4 @@
-class MusixmatchTypeError extends Error {
+class MusixmatchTypeError extends TypeError {
   constructor(...message: string[]) {
     super(message.join(" "));
     this.name = "MusixmatchTypeError";
@@ -11,5 +11,30 @@ class MusixmatchError extends Error {
     this.name = "MusixmatchError";
   }
 }
+class MusixmatchSyntaxError extends SyntaxError {
+  constructor(...message: string[]) {
+    super(message.join(" "));
+    this.name = "MusixmatchSyntaxError";
+  }
+}
+class MusixmatchReferenceError extends ReferenceError {
+  constructor(...message: string[]) {
+    super(message.join(" "));
+    this.name = "MusixmatchReferenceError";
+  }
+}
 
-export { MusixmatchError, MusixmatchTypeError };
+class MusixmatchAPIError extends Error {
+  constructor(...message: string[]) {
+    super(message.join(" "));
+    this.name = "MusixmatchAPIError";
+  }
+}
+
+export {
+  MusixmatchError,
+  MusixmatchTypeError,
+  MusixmatchReferenceError,
+  MusixmatchSyntaxError,
+  MusixmatchAPIError,
+};

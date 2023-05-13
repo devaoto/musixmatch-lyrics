@@ -16,7 +16,13 @@ import {
   TrackNameType,
   TrackSearchRetrunType,
 } from "../types";
-import { MusixmatchError, MusixmatchTypeError } from "./errors";
+import {
+  MusixmatchAPIError,
+  MusixmatchError,
+  MusixmatchReferenceError,
+  MusixmatchSyntaxError,
+  MusixmatchTypeError,
+} from "./errors";
 
 class MusixmatchAPI {
   private apiKey: string | undefined;
@@ -38,6 +44,18 @@ class MusixmatchAPI {
       );
     }
     this.apiKey = apiKey;
+  }
+
+  private checkError(error: any) {
+    if (error instanceof SyntaxError) {
+      throw new MusixmatchSyntaxError(error.message);
+    } else if (error instanceof TypeError) {
+      throw new MusixmatchTypeError(error.message);
+    } else if (error instanceof ReferenceError) {
+      throw new MusixmatchReferenceError(error.message);
+    } else {
+      throw new MusixmatchError(error.message);
+    }
   }
 
   private handleStatusCode(statusCode: number) {
@@ -85,10 +103,11 @@ class MusixmatchAPI {
           const lyrics: any = response.data.message.body.lyrics;
           return lyrics;
         } else {
-          throw new MusixmatchError(this.handleStatusCode(response.status));
+          throw new MusixmatchAPIError(this.handleStatusCode(response.status));
         }
       } catch (error: any) {
-        throw new MusixmatchError(error.message);
+        this.checkError(error);
+        return undefined;
       }
     } else {
       const { artistName, trackName } = identifier;
@@ -120,10 +139,11 @@ class MusixmatchAPI {
             );
           }
         } else {
-          throw new MusixmatchError(this.handleStatusCode(response.status));
+          throw new MusixmatchAPIError(this.handleStatusCode(response.status));
         }
       } catch (error: any) {
-        throw new MusixmatchError(error.message);
+        this.checkError(error);
+        return undefined;
       }
     }
   }
@@ -158,10 +178,11 @@ class MusixmatchAPI {
           const subtitles: any = response.data.message.body.subtitle;
           return subtitles;
         } else {
-          throw new MusixmatchError(this.handleStatusCode(response.status));
+          throw new MusixmatchAPIError(this.handleStatusCode(response.status));
         }
       } catch (error: any) {
-        throw new MusixmatchError(error.message);
+        this.checkError(error);
+        return undefined;
       }
     } else {
       const { artistName, trackName } = identifier;
@@ -193,10 +214,11 @@ class MusixmatchAPI {
             );
           }
         } else {
-          throw new MusixmatchError(this.handleStatusCode(response.status));
+          throw new MusixmatchAPIError(this.handleStatusCode(response.status));
         }
       } catch (error: any) {
-        throw new MusixmatchError(error.message);
+        this.checkError(error);
+        return undefined;
       }
     }
   }
@@ -233,10 +255,11 @@ class MusixmatchAPI {
           response.data.message.body.track_list[0].track.track_id;
         return trackId;
       } else {
-        throw new MusixmatchError(this.handleStatusCode(response.status));
+        throw new MusixmatchAPIError(this.handleStatusCode(response.status));
       }
     } catch (error: any) {
-      throw new MusixmatchError(error.message);
+      this.checkError(error);
+      return undefined;
     }
   }
 
@@ -271,10 +294,11 @@ class MusixmatchAPI {
         if (response.status == 200) {
           return response.data.message.body.track_list[0].track;
         } else {
-          throw new MusixmatchError(this.handleStatusCode(response.status));
+          throw new MusixmatchAPIError(this.handleStatusCode(response.status));
         }
       } catch (e: any) {
-        throw new MusixmatchError(e.message);
+        this.checkError(e);
+        return undefined;
       }
     } else {
       const { artistName, trackName } = identifier;
@@ -296,10 +320,11 @@ class MusixmatchAPI {
         if (response.status == 200) {
           return response.data.message.body.track_list[0].track;
         } else {
-          throw new MusixmatchError(this.handleStatusCode(response.status));
+          throw new MusixmatchAPIError(this.handleStatusCode(response.status));
         }
       } catch (e: any) {
-        throw new MusixmatchError(e.message);
+        this.checkError(e);
+        return undefined;
       }
     }
   }
@@ -331,10 +356,11 @@ class MusixmatchAPI {
         if (response.status == 200) {
           return response.data.message.body.track;
         } else {
-          throw new MusixmatchError(this.handleStatusCode(response.status));
+          throw new MusixmatchAPIError(this.handleStatusCode(response.status));
         }
       } catch (error: any) {
-        throw new MusixmatchError(error.message);
+        this.checkError(error);
+        return undefined;
       }
     } else {
       const { artistName, trackName } = identifier;
@@ -359,10 +385,11 @@ class MusixmatchAPI {
         if (response.status == 200) {
           return response.data.message.body.track;
         } else {
-          throw new MusixmatchError(this.handleStatusCode(response.status));
+          throw new MusixmatchAPIError(this.handleStatusCode(response.status));
         }
       } catch (err: any) {
-        throw new MusixmatchError(err.message);
+        this.checkError(err);
+        return undefined;
       }
     }
   }
@@ -399,10 +426,11 @@ class MusixmatchAPI {
             return false;
           }
         } else {
-          throw new MusixmatchError(this.handleStatusCode(response.status));
+          throw new MusixmatchAPIError(this.handleStatusCode(response.status));
         }
       } catch (error: any) {
-        throw new MusixmatchError(error.message);
+        this.checkError(error);
+        return undefined;
       }
     } else {
       const { trackName, artistName } = identifier;
@@ -431,10 +459,11 @@ class MusixmatchAPI {
             return false;
           }
         } else {
-          throw new MusixmatchError(this.handleStatusCode(response.status));
+          throw new MusixmatchAPIError(this.handleStatusCode(response.status));
         }
       } catch (error: any) {
-        throw new MusixmatchError(error.message);
+        this.checkError(error);
+        return undefined;
       }
     }
   }
@@ -472,10 +501,11 @@ class MusixmatchAPI {
             return false;
           }
         } else {
-          throw new MusixmatchError(this.handleStatusCode(response.status));
+          throw new MusixmatchAPIError(this.handleStatusCode(response.status));
         }
       } catch (error: any) {
-        throw new MusixmatchError(error.message);
+        this.checkError(error);
+        return undefined;
       }
     } else {
       const { artistName, trackName } = identifier;
@@ -504,10 +534,11 @@ class MusixmatchAPI {
             return false;
           }
         } else {
-          throw new MusixmatchError(this.handleStatusCode(response.status));
+          throw new MusixmatchAPIError(this.handleStatusCode(response.status));
         }
       } catch (error: any) {
-        throw new MusixmatchError(error.message);
+        this.checkError(error);
+        return undefined;
       }
     }
   }
@@ -545,10 +576,11 @@ class MusixmatchAPI {
             return false;
           }
         } else {
-          throw new MusixmatchError(this.handleStatusCode(response.status));
+          throw new MusixmatchAPIError(this.handleStatusCode(response.status));
         }
       } catch (error: any) {
-        throw new MusixmatchError(error.message);
+        this.checkError(error);
+        return undefined;
       }
     } else {
       const { artistName, trackName } = identifier;
@@ -577,10 +609,11 @@ class MusixmatchAPI {
             return false;
           }
         } else {
-          throw new MusixmatchError(this.handleStatusCode(response.status));
+          throw new MusixmatchAPIError(this.handleStatusCode(response.status));
         }
       } catch (error: any) {
-        throw new MusixmatchError(error.message);
+        this.checkError(error);
+        return undefined;
       }
     }
   }
@@ -618,10 +651,11 @@ class MusixmatchAPI {
             return false;
           }
         } else {
-          throw new MusixmatchError(this.handleStatusCode(response.status));
+          throw new MusixmatchAPIError(this.handleStatusCode(response.status));
         }
       } catch (error: any) {
-        throw new MusixmatchError(error.message);
+        this.checkError(error);
+        return undefined;
       }
     } else {
       const { artistName, trackName } = identifier;
@@ -651,10 +685,11 @@ class MusixmatchAPI {
             return false;
           }
         } else {
-          throw new MusixmatchError(this.handleStatusCode(response.status));
+          throw new MusixmatchAPIError(this.handleStatusCode(response.status));
         }
       } catch (error: any) {
-        throw new MusixmatchError(error.message);
+        this.checkError(error);
+        return undefined;
       }
     }
   }
@@ -691,10 +726,11 @@ class MusixmatchAPI {
             return false;
           }
         } else {
-          throw new MusixmatchError(this.handleStatusCode(response.status));
+          throw new MusixmatchAPIError(this.handleStatusCode(response.status));
         }
       } catch (error: any) {
-        throw new MusixmatchError(error.message);
+        this.checkError(error);
+        return undefined;
       }
     } else {
       const { trackName, artistName } = identifier;
@@ -725,10 +761,11 @@ class MusixmatchAPI {
             return false;
           }
         } else {
-          throw new MusixmatchError(this.handleStatusCode(response.status));
+          throw new MusixmatchAPIError(this.handleStatusCode(response.status));
         }
       } catch (error: any) {
-        throw new MusixmatchError(error.message);
+        this.checkError(error);
+        return undefined;
       }
     }
   }
@@ -773,10 +810,11 @@ class MusixmatchAPI {
       if (response.status == 200) {
         return response.data.message.body;
       } else {
-        throw new MusixmatchError(this.handleStatusCode(response.status));
+        throw new MusixmatchAPIError(this.handleStatusCode(response.status));
       }
     } catch (e: any) {
-      throw new MusixmatchError(e.message);
+      this.checkError(e);
+      return undefined;
     }
   }
 
@@ -836,10 +874,11 @@ class MusixmatchAPI {
         if (response.status == 200) {
           return response.data.message.body;
         } else {
-          throw new MusixmatchError(this.handleStatusCode(response.status));
+          throw new MusixmatchAPIError(this.handleStatusCode(response.status));
         }
       } catch (e: any) {
-        throw new MusixmatchError(e.message);
+        this.checkError(e);
+        return undefined;
       }
     } else if (chartName === "top") {
       try {
@@ -849,7 +888,7 @@ class MusixmatchAPI {
         if (response.status == 200) {
           return response.data.message.body;
         } else {
-          throw new MusixmatchError(this.handleStatusCode(response.status));
+          throw new MusixmatchAPIError(this.handleStatusCode(response.status));
         }
       } catch (e: any) {
         throw new MusixmatchError(e.message);
@@ -862,10 +901,11 @@ class MusixmatchAPI {
         if (response.status == 200) {
           return response.data.message.body;
         } else {
-          throw new MusixmatchError(this.handleStatusCode(response.status));
+          throw new MusixmatchAPIError(this.handleStatusCode(response.status));
         }
       } catch (e: any) {
-        throw new MusixmatchError(e.message);
+        this.checkError(e);
+        return undefined;
       }
     } else if (chartName === "mxmWeeklyNew") {
       try {
@@ -875,10 +915,11 @@ class MusixmatchAPI {
         if (response.status == 200) {
           return response.data.message.body;
         } else {
-          throw new MusixmatchError(this.handleStatusCode(response.status));
+          throw new MusixmatchAPIError(this.handleStatusCode(response.status));
         }
       } catch (e: any) {
-        throw new MusixmatchError(e.message);
+        this.checkError(e);
+        return undefined;
       }
     } else {
       throw new MusixmatchError("Invalid chart name", chartName);
@@ -918,10 +959,11 @@ class MusixmatchAPI {
       if (response.status === 200) {
         return "Lyrics Posted.";
       } else {
-        throw new MusixmatchError(this.handleStatusCode(response.status));
+        throw new MusixmatchAPIError(this.handleStatusCode(response.status));
       }
     } catch (e: any) {
-      throw new MusixmatchError(e.message);
+      this.checkError(e);
+      return undefined;
     }
   }
 
@@ -956,10 +998,11 @@ class MusixmatchAPI {
           const lyrics: any = response.data.message.body.lyrics;
           return lyrics;
         } else {
-          throw new MusixmatchError(this.handleStatusCode(response.status));
+          throw new MusixmatchAPIError(this.handleStatusCode(response.status));
         }
       } catch (error: any) {
-        throw new MusixmatchError(error.message);
+        this.checkError(error);
+        return undefined;
       }
     } else {
       const { artistName, trackName } = identifier;
@@ -991,10 +1034,11 @@ class MusixmatchAPI {
             );
           }
         } else {
-          throw new MusixmatchError(this.handleStatusCode(response.status));
+          throw new MusixmatchAPIError(this.handleStatusCode(response.status));
         }
       } catch (error: any) {
-        throw new MusixmatchError(error.message);
+        this.checkError(error);
+        return undefined;
       }
     }
   }
@@ -1029,10 +1073,11 @@ class MusixmatchAPI {
           const subtitles: any = response.data.message.body.subtitle;
           return subtitles;
         } else {
-          throw new MusixmatchError(this.handleStatusCode(response.status));
+          throw new MusixmatchAPIError(this.handleStatusCode(response.status));
         }
       } catch (error: any) {
-        throw new MusixmatchError(error.message);
+        this.checkError(error);
+        return undefined;
       }
     } else {
       const { artistName, trackName } = identifier;
@@ -1064,10 +1109,11 @@ class MusixmatchAPI {
             );
           }
         } else {
-          throw new MusixmatchError(this.handleStatusCode(response.status));
+          throw new MusixmatchAPIError(this.handleStatusCode(response.status));
         }
       } catch (error: any) {
-        throw new MusixmatchError(error.message);
+        this.checkError(error);
+        return undefined;
       }
     }
   }
