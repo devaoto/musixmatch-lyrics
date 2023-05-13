@@ -59,11 +59,8 @@ class MusixmatchAPI {
 
   /**
    *
-   * @param {TrackIDType} trackId The TrackID to get lyrics
-   * @returns {LyricsReturnType} Lyrics
-   *
-   * ! API Key Required
-   *
+   * @param {TrackIDType | { artistName: ArtistNameType, trackName: TrackNameType }} identifier Specify trackID or artist name, track name
+   * @returns {LyricsReturnType} lyrics.
    */
 
   async trackLyricsGet(
@@ -245,10 +242,8 @@ class MusixmatchAPI {
 
   /**
    *
-   * @param {ArtistNameType} artistName
-   * @param {TrackNameType} songName
+   * @param {TrackIDType | { artistName: ArtistNameType, trackName: TrackNameType }} identifier specify trackID or artist name, track name
    * @returns {TrackSearchRetrunType} Track Info
-   *
    * Get Track info with artistName and songName
    */
 
@@ -309,6 +304,12 @@ class MusixmatchAPI {
     }
   }
 
+  /**
+   *
+   * @param {TrackIDType | { artistName: ArtistNameType, trackName: TrackNameType }} identifier Identifier for trackName, artistName, trackID. Specify trackId only for artist name, track name
+   * @returns {TrackGetReturnType} simplified track information
+   */
+
   async trackGet(
     identifier:
       | TrackIDType
@@ -367,7 +368,7 @@ class MusixmatchAPI {
   }
   /**
    *
-   * @param {TrackIDType} trackId
+   * @param {TrackIDType | { artistName: ArtistNameType, trackName: TrackNameType }} identifier
    * @returns true or false
    *
    * Checks if the track has lyrics or not.
@@ -440,7 +441,7 @@ class MusixmatchAPI {
 
   /**
    *
-   * @param {TrackIDType} trackId
+   * @param {TrackIDType | { artistName: ArtistNameType, trackName: TrackNameType }} identifier
    * @returns boolean
    *
    * Check if the track is instrumental or not.
@@ -513,7 +514,7 @@ class MusixmatchAPI {
 
   /**
    *
-   * @param {TrackIDType} trackId
+   * @param {TrackIDType | { artistName: ArtistNameType, trackName: TrackNameType }} identifier
    * @returns boolean
    *
    * Check if the track is explicit ot not.
@@ -586,7 +587,7 @@ class MusixmatchAPI {
 
   /**
    *
-   * @param {TrackIDType} trackId
+   * @param {TrackIDType | { artistName: ArtistNameType, trackName: TrackNameType }} identifier
    * @returns boolean
    *
    * Check if the track has subtitle or not.
@@ -657,6 +658,13 @@ class MusixmatchAPI {
       }
     }
   }
+  /**
+   *
+   * @param {TrackIDType | { artistName: ArtistNameType, trackName: TrackNameType }} identifier
+   * @returns boolean
+   *
+   * Check if the song is restricted on musixmatch or not.
+   */
   async isRestricted(
     identifier:
       | TrackIDType
@@ -919,7 +927,7 @@ class MusixmatchAPI {
 
   /**
    *
-   * @param {TrackIDType} trackId The TrackID to get lyrics
+   * @param {TrackIDType | { artistName: ArtistNameType, trackName: TrackNameType }} identifier The TrackID or the artistName, trackName to get lyrics
    * @returns {LyricsReturnType} Lyrics
    *
    * ! API Key Required
