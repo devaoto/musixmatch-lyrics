@@ -6,12 +6,17 @@ module.exports = {
       {
         targets: {
           esmodules: false,
-          browsers: ["ie >= 8"],
+          browsers: ["ie >= 10"],
         },
         useBuiltIns: "usage",
         corejs: 3,
       },
     ],
   ],
-  plugins: ["@babel/plugin-transform-runtime"],
+  plugins: [
+    "@babel/plugin-transform-runtime",
+    "babel-plugin-transform-async-to-promises",
+  ],
+  sourceMaps: true,
+  highlightCode: true,
 };
