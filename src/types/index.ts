@@ -8,5 +8,6 @@ export {
   TrackGetReturnType,
   TrackIDReturnType,
   TrackSearchRetrunType,
+  TrackSnippetReturnType,
   TranslationReturnType,
 } from "./returnTypes";

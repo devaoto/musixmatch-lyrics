@@ -4,3 +4,4 @@ export { GetLyrics } from "./getLyricsInt";
 export { SubtitleInt } from "./subtitleInt";
 export { TrackGet } from "./trackGet";
 export { TrackInfo } from "./trackInfoInt";
+export { TrackSnippet } from "./trackSnippet";

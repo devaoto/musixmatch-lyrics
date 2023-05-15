@@ -4,6 +4,7 @@ import {
   GetLyrics,
   SubtitleInt,
   TrackInfo,
+  TrackSnippet,
 } from "../interfaces";
 import { MusixmatchBoolean, MusixmatchString } from "./rawDataTypes";
 
@@ -16,6 +17,7 @@ type HasLyricsReturnType = Promise<MusixmatchBoolean | undefined>;
 type TrackGetReturnType = Promise<MusixmatchString | undefined>;
 type ChartArtistReturnType = Promise<ChartArtist | undefined>;
 type ChartTracksReturnType = Promise<ChartTracks | undefined>;
+type TrackSnippetReturnType = Promise<TrackSnippet | undefined>;
 
 export {
   LyricsReturnType,
@@ -27,4 +29,5 @@ export {
   TrackGetReturnType,
   ChartArtistReturnType,
   ChartTracksReturnType,
+  TrackSnippetReturnType,
 };

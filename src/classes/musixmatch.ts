@@ -15,6 +15,7 @@ import {
   TrackIDType,
   TrackNameType,
   TrackSearchRetrunType,
+  TrackSnippetReturnType,
 } from "../types";
 import {
   MusixmatchAPIError,
@@ -622,7 +623,6 @@ class MusixmatchAPI {
    *
    * @param {TrackIDType | { artistName: ArtistNameType, trackName: TrackNameType }} identifier
    * @returns boolean
-   *
    * Check if the track has subtitle or not.
    */
 
@@ -1115,6 +1115,35 @@ class MusixmatchAPI {
         this.checkError(error);
         return undefined;
       }
+    }
+  }
+
+  /**
+   *
+   * @param {TrackIDType} trackID The track ID to get snippet.
+   * @returns {TrackSnippetReturnType} Track Snippet
+   */
+
+  async trackSnippetGet(trackID: TrackIDType): TrackSnippetReturnType {
+    if (typeof trackID !== "string") {
+      throw new MusixmatchTypeError(
+        'Expected type to be a "string" but got',
+        typeof trackID,
+        "instead."
+      );
+    }
+    try {
+      const response = await axios.get(
+        `https://api.musixmatch.com/ws/1.1/track.snippet.get?track_id=${trackID}&apikey=${this.apiKey}`
+      );
+      if (response.status == 200) {
+        return response.data.message.body;
+      } else {
+        throw new MusixmatchAPIError(this.handleStatusCode(response.status));
+      }
+    } catch (error: any) {
+      this.checkError(error);
+      return undefined;
     }
   }
 }
