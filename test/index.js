@@ -1,28 +1,4 @@
-const {
-  MusixmatchAPI,
-  APILatency,
-  ModuleVersion,
-  APIVersion,
-  BaseAPIURL,
-} = require("../dist");
-const mxm = new MusixmatchAPI("APIKey");
+const { MusixmatchAPI } = require("../dist");
+const mxm = new MusixmatchAPI();
 
-async function lat() {
-  console.log(await APILatency());
-}
-
-lat();
-
-// mxm.getLyricsByNames("FiZ", "On The Low").then((lyrics) => {
-// if (mxm.hasLyrics("FiZ", "On The Low")) {
-//   console.log(
-//     lyrics.lyrics_body,
-//     "\n",
-//     "ID: " + lyrics.lyrics_id,
-//     "\n",
-//     lyrics.lyrics_copyright
-//   );
-// } else {
-//   console.log("Lyrics Not Available.");
-// }
-// });
+mxm.trackGet();

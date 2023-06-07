@@ -72,7 +72,7 @@ class MusixmatchAPI {
    * @param {string} apiKey - The Musixmatch API Key
    */
   constructor(apiKey?: string) {
-    if (typeof apiKey !== "undefined" ?? typeof apiKey !== "string") {
+    if (typeof apiKey !== "undefined" && typeof apiKey !== "string") {
       throw new MusixmatchTypeError(
         `Expected Type to be "string" but got ${typeof apiKey} instead.`
       );
