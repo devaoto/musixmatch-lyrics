@@ -3,6 +3,7 @@ import {
   ChartTracks,
   GetLyrics,
   SubtitleInt,
+  TrackGet,
   TrackInfo,
   TrackSnippet,
 } from "../interfaces";
@@ -14,7 +15,7 @@ type SubtitleReturnType = Promise<SubtitleInt | undefined>;
 type TranslationReturnType = Promise<MusixmatchString | undefined>;
 type TrackSearchRetrunType = Promise<TrackInfo | undefined>;
 type HasLyricsReturnType = Promise<MusixmatchBoolean | undefined>;
-type TrackGetReturnType = Promise<MusixmatchString | undefined>;
+type TrackGetReturnType = Promise<TrackGet | undefined>;
 type ChartArtistReturnType = Promise<ChartArtist | undefined>;
 type ChartTracksReturnType = Promise<ChartTracks | undefined>;
 type TrackSnippetReturnType = Promise<TrackSnippet | undefined>;
