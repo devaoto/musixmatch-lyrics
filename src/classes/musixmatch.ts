@@ -1,5 +1,8 @@
+declare const Promise: typeof globalThis.Promise;
+
 if (typeof Promise === "undefined" || Promise == null) {
-  const Promise = require("es6-promise").Promise;
+  const { Promise: ES6Promise } = require("es6-promise");
+  globalThis.Promise = ES6Promise;
 }
 
 import axios, { AxiosResponse } from "axios";
