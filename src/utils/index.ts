@@ -1,3 +1,4 @@
+export { ChartType, getChartType } from "./ChartTypes";
 export {
   APILatency,
   APIVersion,
