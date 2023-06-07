@@ -33,19 +33,18 @@ const BaseAPIURL = (): url => {
  *
  * The version of module.
  */
-
 const ModuleVersion = (): moduleVer => {
   const pkg = require("../../package.json");
 
   return pkg.version;
 };
 
-const apiLatency = async () => {
+const apiLatency = async (): Promise<number> => {
   const start = performance.now();
   const URL = "https://api.musixmatch.com/ws/1.1/";
   const res = await axios.get(URL);
   const end = performance.now();
-  const latency = start - end;
+  const latency = end - start;
 
   return latency;
 };
@@ -56,8 +55,7 @@ const apiLatency = async () => {
  *
  * The API Latency
  */
-
-const APILatency = async (): latency => {
+const APILatency = async (): Promise<latency> => {
   return formatLatency(await apiLatency());
 };
 
@@ -99,12 +97,12 @@ class Utils {
 
     return pkg.version;
   }
-  apiLatency = async () => {
+  apiLatency = async (): Promise<number> => {
     const start = performance.now();
     const URL = "https://api.musixmatch.com/ws/1.1/";
     const res = await axios.get(URL);
     const end = performance.now();
-    const latency = start - end;
+    const latency = end - start;
 
     return latency;
   };
@@ -114,7 +112,7 @@ class Utils {
    *
    * The API Latency
    */
-  APILatency = async (): latency => {
+  APILatency = async (): Promise<latency> => {
     return formatLatency(await this.apiLatency());
   };
 }
