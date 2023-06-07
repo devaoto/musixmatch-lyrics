@@ -1272,6 +1272,65 @@ class MusixmatchAPI {
       }
     });
   }
+  /**
+   * Get ArtistID
+   * @param {TrackNameType} trackName - The track name (any track of the artist)
+   * @param {ArtistNameType} artistName - The artist name
+   * @returns {Promise<number>} artistId
+   */
+  async getArtistID(trackName: TrackNameType, artistName: ArtistNameType) {
+    return new Promise<number>(async (resolve, reject) => {
+      if (typeof artistName !== "string" || typeof trackName !== "string") {
+        reject(
+          new MusixmatchTypeError(
+            `Expected artistName and trackName to be of type "string" but got ${typeof artistName} and ${typeof trackName} instead.`
+          )
+        );
+      }
+      try {
+        const res = await axios.get(
+          `https://api.musixmatch.com/ws/1.1/track.search?q_artist=${artistName}&q_track=${trackName}`
+        );
+        if (res.status == 200) {
+          const artistId = res.data?.message.body.track_list[0].track.artist_id;
+          resolve(artistId);
+        } else {
+          reject(new MusixmatchAPIError(this.handleStatusCode(res.status)));
+        }
+      } catch (e) {
+        this.checkError(e);
+      }
+    });
+  }
+  /**
+   * Get Artist Data (Simplified)
+   * @param {number} artistID - The artist id
+   * @returns {Promise<any>} artist info
+   */
+  async artistGet(artistID: number) {
+    return new Promise<any>(async (reject, resolve) => {
+      if (typeof artistID !== "number") {
+        reject(
+          new MusixmatchTypeError(
+            `Expected type of artist ID to be "number" but got "${typeof artistID}" instead`
+          )
+        );
+      }
+      try {
+        const res = await axios.get(
+          `https://api.musixmatch.com/ws/1.1/artist.get?artist_id=${artistID}`
+        );
+        if (res.status == 200) {
+          const artistGetData = res.data?.message.body;
+          resolve(artistGetData);
+        } else {
+          reject(new MusixmatchAPIError(this.handleStatusCode(res.status)));
+        }
+      } catch (e) {
+        this.checkError(e);
+      }
+    });
+  }
 }
 
 export { MusixmatchAPI };
