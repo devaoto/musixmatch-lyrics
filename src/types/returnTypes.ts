@@ -1,4 +1,5 @@
 import {
+  ArtistGet,
   ChartArtist,
   ChartTracks,
   GetLyrics,
@@ -19,6 +20,7 @@ type TrackGetReturnType = Promise<TrackGet | undefined>;
 type ChartArtistReturnType = Promise<ChartArtist | undefined>;
 type ChartTracksReturnType = Promise<ChartTracks | undefined>;
 type TrackSnippetReturnType = Promise<TrackSnippet | undefined>;
+type ArtistGetReturnType = Promise<ArtistGet | undefined>;
 
 export {
   LyricsReturnType,
@@ -29,6 +31,7 @@ export {
   HasLyricsReturnType,
   TrackGetReturnType,
   ChartArtistReturnType,
+  ArtistGetReturnType,
   ChartTracksReturnType,
   TrackSnippetReturnType,
 };

@@ -17,6 +17,7 @@ import {
   TrackSearchRetrunType,
   TrackSnippetReturnType,
 } from "../types";
+import { ArtistGetReturnType } from "../types/returnTypes";
 import {
   MusixmatchAPIError,
   MusixmatchError,
@@ -1305,10 +1306,10 @@ class MusixmatchAPI {
   /**
    * Get Artist Data (Simplified)
    * @param {number} artistID - The artist id
-   * @returns {Promise<any>} artist info
+   * @returns {Promise<ArtistGetReturnType>} artist info
    */
   async artistGet(artistID: number) {
-    return new Promise<any>(async (reject, resolve) => {
+    return new Promise<ArtistGetReturnType>(async (resolve, reject) => {
       if (typeof artistID !== "number") {
         reject(
           new MusixmatchTypeError(

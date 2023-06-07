@@ -1,3 +1,4 @@
+export { ArtistGet } from "./artistGet";
 export { ChartArtist } from "./chartArtistGet";
 export { ChartTracks } from "./chartTracksGet";
 export { GetLyrics } from "./getLyricsInt";
