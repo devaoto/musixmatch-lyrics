@@ -31,10 +31,18 @@ class MusixmatchAPIError extends Error {
   }
 }
 
+class MusixmatchRangeError extends RangeError {
+  constructor(...message: string[]) {
+    super(message.join(" "));
+    this.name = "MusixmatchRangeError";
+  }
+}
+
 export {
   MusixmatchError,
   MusixmatchTypeError,
   MusixmatchReferenceError,
   MusixmatchSyntaxError,
   MusixmatchAPIError,
+  MusixmatchRangeError,
 };
