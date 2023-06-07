@@ -104,7 +104,7 @@ class MusixmatchAPI {
 
         try {
           const response: AxiosResponse = await axios.get(
-            `https://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=${trackId}&apikey=${this.apiKey}`
+            `https://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=${trackId}&apikey=${this?.apiKey}`
           );
 
           if (response.status === 200) {
@@ -112,11 +112,11 @@ class MusixmatchAPI {
             resolve(lyrics);
           } else {
             reject(
-              new MusixmatchAPIError(this.handleStatusCode(response.status))
+              new MusixmatchAPIError(this?.handleStatusCode(response.status))
             );
           }
         } catch (error: any) {
-          this.checkError(error);
+          this?.checkError(error);
         }
       } else {
         const { artistName, trackName } = identifier;
@@ -131,14 +131,14 @@ class MusixmatchAPI {
           const response: AxiosResponse = await axios.get(
             `https://api.musixmatch.com/ws/1.1/track.search?q_artist=${encodeURIComponent(
               artistName
-            )}&q_track=${encodeURIComponent(trackName)}&apikey=${this.apiKey}`
+            )}&q_track=${encodeURIComponent(trackName)}&apikey=${this?.apiKey}`
           );
 
           if (response.status === 200) {
             const trackId: string =
               response.data?.message.body.track_list[0].track.track_id;
             const lyricsResponse: AxiosResponse = await axios.get(
-              `https://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=${trackId}&apikey=${this.apiKey}`
+              `https://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=${trackId}&apikey=${this?.apiKey}`
             );
 
             if (lyricsResponse.status === 200) {
@@ -147,17 +147,17 @@ class MusixmatchAPI {
             } else {
               reject(
                 new MusixmatchError(
-                  this.handleStatusCode(lyricsResponse.status)
+                  this?.handleStatusCode(lyricsResponse.status)
                 )
               );
             }
           } else {
             reject(
-              new MusixmatchAPIError(this.handleStatusCode(response.status))
+              new MusixmatchAPIError(this?.handleStatusCode(response.status))
             );
           }
         } catch (error: any) {
-          this.checkError(error);
+          this?.checkError(error);
         }
       }
     });
@@ -189,7 +189,7 @@ class MusixmatchAPI {
         }
         try {
           const response: AxiosResponse = await axios.get(
-            `https://api.musixmatch.com/ws/1.1/track.subtitles.get?track_id=${trackId}&apikey=${this.apiKey}`
+            `https://api.musixmatch.com/ws/1.1/track.subtitles.get?track_id=${trackId}&apikey=${this?.apiKey}`
           );
 
           if (response.status === 200) {
@@ -197,11 +197,11 @@ class MusixmatchAPI {
             resolve(subtitles);
           } else {
             reject(
-              new MusixmatchAPIError(this.handleStatusCode(response.status))
+              new MusixmatchAPIError(this?.handleStatusCode(response.status))
             );
           }
         } catch (error: any) {
-          this.checkError(error);
+          this?.checkError(error);
         }
       } else {
         const { artistName, trackName } = identifier;
@@ -216,14 +216,14 @@ class MusixmatchAPI {
           const response: AxiosResponse = await axios.get(
             `https://api.musixmatch.com/ws/1.1/track.search?q_artist=${encodeURIComponent(
               artistName
-            )}&q_track=${encodeURIComponent(trackName)}&apikey=${this.apiKey}`
+            )}&q_track=${encodeURIComponent(trackName)}&apikey=${this?.apiKey}`
           );
 
           if (response.status === 200) {
             const trackId: string =
               response.data?.message.body.track_list[0].track.track_id;
             const subtitleResponse: AxiosResponse = await axios.get(
-              `https://api.musixmatch.com/ws/1.1/track.subtitles.get?track_id=${trackId}&apikey=${this.apiKey}`
+              `https://api.musixmatch.com/ws/1.1/track.subtitles.get?track_id=${trackId}&apikey=${this?.apiKey}`
             );
 
             if (subtitleResponse.status === 200) {
@@ -233,17 +233,17 @@ class MusixmatchAPI {
             } else {
               reject(
                 new MusixmatchError(
-                  this.handleStatusCode(subtitleResponse.status)
+                  this?.handleStatusCode(subtitleResponse.status)
                 )
               );
             }
           } else {
             reject(
-              new MusixmatchAPIError(this.handleStatusCode(response.status))
+              new MusixmatchAPIError(this?.handleStatusCode(response.status))
             );
           }
         } catch (error: any) {
-          this.checkError(error);
+          this?.checkError(error);
         }
       }
     });
@@ -278,7 +278,7 @@ class MusixmatchAPI {
 
       try {
         const response: AxiosResponse = await axios.get(
-          `https://api.musixmatch.com/ws/1.1/track.search?q_track=${trackName}&q_artist=${artistName}&apikey=${this.apiKey}`
+          `https://api.musixmatch.com/ws/1.1/track.search?q_track=${trackName}&q_artist=${artistName}&apikey=${this?.apiKey}`
         );
 
         if (response.status === 200) {
@@ -287,11 +287,11 @@ class MusixmatchAPI {
           resolve(trackId);
         } else {
           reject(
-            new MusixmatchAPIError(this.handleStatusCode(response.status))
+            new MusixmatchAPIError(this?.handleStatusCode(response.status))
           );
         }
       } catch (error: any) {
-        this.checkError(error);
+        this?.checkError(error);
       }
     });
   }
@@ -320,7 +320,7 @@ class MusixmatchAPI {
 
         try {
           const response: AxiosResponse = await axios.get(
-            `https://api.musixmatch.com/ws/1.1/track.search?track_id=${trackId}&apikey=${this.apiKey}`
+            `https://api.musixmatch.com/ws/1.1/track.search?track_id=${trackId}&apikey=${this?.apiKey}`
           );
 
           if (response.status === 200) {
@@ -329,11 +329,11 @@ class MusixmatchAPI {
             resolve(trackInfo);
           } else {
             reject(
-              new MusixmatchAPIError(this.handleStatusCode(response.status))
+              new MusixmatchAPIError(this?.handleStatusCode(response.status))
             );
           }
         } catch (error: any) {
-          this.checkError(error);
+          this?.checkError(error);
         }
       } else {
         const { artistName, trackName } = identifier;
@@ -354,7 +354,7 @@ class MusixmatchAPI {
 
         try {
           const response: AxiosResponse = await axios.get(
-            `https://api.musixmatch.com/ws/1.1/track.search?q_track=${trackName}&q_artist=${artistName}&apikey=${this.apiKey}`
+            `https://api.musixmatch.com/ws/1.1/track.search?q_track=${trackName}&q_artist=${artistName}&apikey=${this?.apiKey}`
           );
 
           if (response.status === 200) {
@@ -363,11 +363,11 @@ class MusixmatchAPI {
             resolve(trackInfo);
           } else {
             reject(
-              new MusixmatchAPIError(this.handleStatusCode(response.status))
+              new MusixmatchAPIError(this?.handleStatusCode(response.status))
             );
           }
         } catch (error: any) {
-          this.checkError(error);
+          this?.checkError(error);
         }
       }
     });
@@ -405,11 +405,11 @@ class MusixmatchAPI {
             resolve(trackInfo);
           } else {
             reject(
-              new MusixmatchAPIError(this.handleStatusCode(response.status))
+              new MusixmatchAPIError(this?.handleStatusCode(response.status))
             );
           }
         } catch (error: any) {
-          this.checkError(error);
+          this?.checkError(error);
         }
       } else {
         const { artistName, trackName } = identifier;
@@ -439,11 +439,11 @@ class MusixmatchAPI {
             resolve(trackInfo);
           } else {
             reject(
-              new MusixmatchAPIError(this.handleStatusCode(response.status))
+              new MusixmatchAPIError(this?.handleStatusCode(response.status))
             );
           }
         } catch (error: any) {
-          this.checkError(error);
+          this?.checkError(error);
         }
       }
     });
@@ -473,7 +473,7 @@ class MusixmatchAPI {
 
         try {
           const response: AxiosResponse = await axios.get(
-            `https://api.musixmatch.com/ws/1.1/track.get?track_id=${trackId}&apikey=${this.apiKey}`
+            `https://api.musixmatch.com/ws/1.1/track.get?track_id=${trackId}&apikey=${this?.apiKey}`
           );
 
           if (response.status === 200) {
@@ -482,11 +482,11 @@ class MusixmatchAPI {
             resolve(hasLyrics);
           } else {
             reject(
-              new MusixmatchAPIError(this.handleStatusCode(response.status))
+              new MusixmatchAPIError(this?.handleStatusCode(response.status))
             );
           }
         } catch (error: any) {
-          this.checkError(error);
+          this?.checkError(error);
           reject(error);
         }
       } else {
@@ -500,7 +500,7 @@ class MusixmatchAPI {
         }
         try {
           const response: AxiosResponse = await axios.get(
-            `https://api.musixmatch.com/ws/1.1/track.get?q_artist=${artistName}&q_track=${trackName}&apikey=${this.apiKey}`
+            `https://api.musixmatch.com/ws/1.1/track.get?q_artist=${artistName}&q_track=${trackName}&apikey=${this?.apiKey}`
           );
           if (response.status === 200) {
             const hasLyrics: any =
@@ -508,11 +508,11 @@ class MusixmatchAPI {
             resolve(hasLyrics);
           } else {
             reject(
-              new MusixmatchAPIError(this.handleStatusCode(response.status))
+              new MusixmatchAPIError(this?.handleStatusCode(response.status))
             );
           }
         } catch (error: any) {
-          this.checkError(error);
+          this?.checkError(error);
           reject(error);
         }
       }
@@ -544,7 +544,7 @@ class MusixmatchAPI {
 
         try {
           const response: AxiosResponse = await axios.get(
-            `https://api.musixmatch.com/ws/1.1/track.get?track_id=${trackId}&apikey=${this.apiKey}`
+            `https://api.musixmatch.com/ws/1.1/track.get?track_id=${trackId}&apikey=${this?.apiKey}`
           );
 
           if (response.status === 200) {
@@ -555,11 +555,11 @@ class MusixmatchAPI {
             }
           } else {
             reject(
-              new MusixmatchAPIError(this.handleStatusCode(response.status))
+              new MusixmatchAPIError(this?.handleStatusCode(response.status))
             );
           }
         } catch (error: any) {
-          this.checkError(error);
+          this?.checkError(error);
         }
       } else {
         const { artistName, trackName } = identifier;
@@ -579,7 +579,7 @@ class MusixmatchAPI {
         }
         try {
           const response: AxiosResponse = await axios.get(
-            `https://api.musixmatch.com/ws/1.1/track.get?q_artist=${artistName}&q_track=${trackName}&apikey=${this.apiKey}`
+            `https://api.musixmatch.com/ws/1.1/track.get?q_artist=${artistName}&q_track=${trackName}&apikey=${this?.apiKey}`
           );
           if (response.status === 200) {
             if (response.data?.message.body.track.instrumental === 1) {
@@ -589,11 +589,11 @@ class MusixmatchAPI {
             }
           } else {
             reject(
-              new MusixmatchAPIError(this.handleStatusCode(response.status))
+              new MusixmatchAPIError(this?.handleStatusCode(response.status))
             );
           }
         } catch (error: any) {
-          this.checkError(error);
+          this?.checkError(error);
         }
       }
     });
@@ -624,7 +624,7 @@ class MusixmatchAPI {
 
         try {
           const response: AxiosResponse = await axios.get(
-            `https://api.musixmatch.com/ws/1.1/track.get?track_id=${trackId}&apikey=${this.apiKey}`
+            `https://api.musixmatch.com/ws/1.1/track.get?track_id=${trackId}&apikey=${this?.apiKey}`
           );
 
           if (response.status === 200) {
@@ -635,11 +635,11 @@ class MusixmatchAPI {
             }
           } else {
             reject(
-              new MusixmatchAPIError(this.handleStatusCode(response.status))
+              new MusixmatchAPIError(this?.handleStatusCode(response.status))
             );
           }
         } catch (error: any) {
-          this.checkError(error);
+          this?.checkError(error);
         }
       } else {
         const { artistName, trackName } = identifier;
@@ -659,7 +659,7 @@ class MusixmatchAPI {
         }
         try {
           const response: AxiosResponse = await axios.get(
-            `https://api.musixmatch.com/ws/1.1/track.get?q_artist=${artistName}&q_track=${trackName}&apikey=${this.apiKey}`
+            `https://api.musixmatch.com/ws/1.1/track.get?q_artist=${artistName}&q_track=${trackName}&apikey=${this?.apiKey}`
           );
           if (response.status === 200) {
             if (response.data?.message.body.track.explicit === 1) {
@@ -669,11 +669,11 @@ class MusixmatchAPI {
             }
           } else {
             reject(
-              new MusixmatchAPIError(this.handleStatusCode(response.status))
+              new MusixmatchAPIError(this?.handleStatusCode(response.status))
             );
           }
         } catch (error: any) {
-          this.checkError(error);
+          this?.checkError(error);
         }
       }
     });
@@ -702,7 +702,7 @@ class MusixmatchAPI {
 
         try {
           const response: AxiosResponse = await axios.get(
-            `https://api.musixmatch.com/ws/1.1/track.get?track_id=${trackId}&apikey=${this.apiKey}`
+            `https://api.musixmatch.com/ws/1.1/track.get?track_id=${trackId}&apikey=${this?.apiKey}`
           );
 
           if (response.status === 200) {
@@ -713,11 +713,11 @@ class MusixmatchAPI {
             }
           } else {
             reject(
-              new MusixmatchAPIError(this.handleStatusCode(response.status))
+              new MusixmatchAPIError(this?.handleStatusCode(response.status))
             );
           }
         } catch (error: any) {
-          this.checkError(error);
+          this?.checkError(error);
         }
       } else {
         const { artistName, trackName } = identifier;
@@ -737,7 +737,7 @@ class MusixmatchAPI {
         }
         try {
           const response: AxiosResponse = await axios.get(
-            `https://api.musixmatch.com/ws/1.1/track.get?q_artist=${artistName}&q_track=${trackName}&apikey=${this.apiKey}`
+            `https://api.musixmatch.com/ws/1.1/track.get?q_artist=${artistName}&q_track=${trackName}&apikey=${this?.apiKey}`
           );
 
           if (response.status === 200) {
@@ -748,11 +748,11 @@ class MusixmatchAPI {
             }
           } else {
             reject(
-              new MusixmatchAPIError(this.handleStatusCode(response.status))
+              new MusixmatchAPIError(this?.handleStatusCode(response.status))
             );
           }
         } catch (error: any) {
-          this.checkError(error);
+          this?.checkError(error);
         }
       }
     });
@@ -784,7 +784,7 @@ class MusixmatchAPI {
         }
         try {
           const response: AxiosResponse = await axios.get(
-            `https://api.musixmatch.com/ws/1.1/track.get?track_id=${trackId}&apikey=${this.apiKey}`
+            `https://api.musixmatch.com/ws/1.1/track.get?track_id=${trackId}&apikey=${this?.apiKey}`
           );
 
           if (response.status === 200) {
@@ -795,11 +795,11 @@ class MusixmatchAPI {
             }
           } else {
             reject(
-              new MusixmatchAPIError(this.handleStatusCode(response.status))
+              new MusixmatchAPIError(this?.handleStatusCode(response.status))
             );
           }
         } catch (error: any) {
-          this.checkError(error);
+          this?.checkError(error);
         }
       } else {
         const { trackName, artistName } = identifier;
@@ -820,7 +820,7 @@ class MusixmatchAPI {
 
         try {
           const response: AxiosResponse = await axios.get(
-            `https://api.musixmatch.com/ws/1.1/track.get?q_artist=${artistName}&q_track=${trackName}&apikey=${this.apiKey}`
+            `https://api.musixmatch.com/ws/1.1/track.get?q_artist=${artistName}&q_track=${trackName}&apikey=${this?.apiKey}`
           );
 
           if (response.status === 200) {
@@ -831,11 +831,11 @@ class MusixmatchAPI {
             }
           } else {
             reject(
-              new MusixmatchAPIError(this.handleStatusCode(response.status))
+              new MusixmatchAPIError(this?.handleStatusCode(response.status))
             );
           }
         } catch (error: any) {
-          this.checkError(error);
+          this?.checkError(error);
         }
       }
     });
@@ -895,18 +895,18 @@ class MusixmatchAPI {
 
       try {
         const response: AxiosResponse = await axios.get(
-          `https://api.musixmatch.com/ws/1.1/chart.artists.get?page=${page}&page_size=${pageSize}&country=${country}&apikey=${this.apiKey}`
+          `https://api.musixmatch.com/ws/1.1/chart.artists.get?page=${page}&page_size=${pageSize}&country=${country}&apikey=${this?.apiKey}`
         );
 
         if (response.status == 200) {
           resolve(response.data?.message.body);
         } else {
           reject(
-            new MusixmatchAPIError(this.handleStatusCode(response.status))
+            new MusixmatchAPIError(this?.handleStatusCode(response.status))
           );
         }
       } catch (e: any) {
-        this.checkError(e);
+        this?.checkError(e);
       }
     });
   }
@@ -983,30 +983,30 @@ class MusixmatchAPI {
       if (chartName === "hot") {
         try {
           const response: AxiosResponse = await axios.get(
-            `https://api.musixmatch.com/ws/1.1/chart.tracks.get?page=${page}&page_size=${pageSize}&country=${country}&chart_name=hot&apikey=${this.apiKey}`
+            `https://api.musixmatch.com/ws/1.1/chart.tracks.get?page=${page}&page_size=${pageSize}&country=${country}&chart_name=hot&apikey=${this?.apiKey}`
           );
 
           if (response.status == 200) {
             resolve(response.data?.message.body);
           } else {
             reject(
-              new MusixmatchAPIError(this.handleStatusCode(response.status))
+              new MusixmatchAPIError(this?.handleStatusCode(response.status))
             );
           }
         } catch (e: any) {
-          this.checkError(e);
+          this?.checkError(e);
         }
       } else if (chartName === "top") {
         try {
           const response: AxiosResponse = await axios.get(
-            `https://api.musixmatch.com/ws/1.1/chart.tracks.get?page=${page}&page_size=${pageSize}&country=${country}&chart_name=top&apikey=${this.apiKey}`
+            `https://api.musixmatch.com/ws/1.1/chart.tracks.get?page=${page}&page_size=${pageSize}&country=${country}&chart_name=top&apikey=${this?.apiKey}`
           );
 
           if (response.status == 200) {
             resolve(response.data?.message.body);
           } else {
             reject(
-              new MusixmatchAPIError(this.handleStatusCode(response.status))
+              new MusixmatchAPIError(this?.handleStatusCode(response.status))
             );
           }
         } catch (e: any) {
@@ -1015,34 +1015,34 @@ class MusixmatchAPI {
       } else if (chartName === "mxmWeekly") {
         try {
           const response: AxiosResponse = await axios.get(
-            `https://api.musixmatch.com/ws/1.1/chart.tracks.get?page=${page}&page_size=${pageSize}&country=${country}&chart_name=mxmweekly&apikey=${this.apiKey}`
+            `https://api.musixmatch.com/ws/1.1/chart.tracks.get?page=${page}&page_size=${pageSize}&country=${country}&chart_name=mxmweekly&apikey=${this?.apiKey}`
           );
 
           if (response.status == 200) {
             resolve(response.data?.message.body);
           } else {
             reject(
-              new MusixmatchAPIError(this.handleStatusCode(response.status))
+              new MusixmatchAPIError(this?.handleStatusCode(response.status))
             );
           }
         } catch (e: any) {
-          this.checkError(e);
+          this?.checkError(e);
         }
       } else if (chartName === "mxmWeeklyNew") {
         try {
           const response: AxiosResponse = await axios.get(
-            `https://api.musixmatch.com/ws/1.1/chart.tracks.get?page=${page}&page_size=${pageSize}&country=${country}&chart_name=mxmweekly_new&apikey=${this.apiKey}`
+            `https://api.musixmatch.com/ws/1.1/chart.tracks.get?page=${page}&page_size=${pageSize}&country=${country}&chart_name=mxmweekly_new&apikey=${this?.apiKey}`
           );
 
           if (response.status == 200) {
             resolve(response.data?.message.body);
           } else {
             reject(
-              new MusixmatchAPIError(this.handleStatusCode(response.status))
+              new MusixmatchAPIError(this?.handleStatusCode(response.status))
             );
           }
         } catch (e: any) {
-          this.checkError(e);
+          this?.checkError(e);
         }
       } else {
         reject(new MusixmatchError("Invalid chart name", chartName));
@@ -1084,17 +1084,17 @@ class MusixmatchAPI {
       });
       try {
         const response: AxiosResponse = await axios.post(
-          `https://api.musixmatch.com/ws/1.1/track.lyrics.post?track_isrc=${ISRC}&lyrics_body=${lyricsBody}&apikey=${this.apiKey}`
+          `https://api.musixmatch.com/ws/1.1/track.lyrics.post?track_isrc=${ISRC}&lyrics_body=${lyricsBody}&apikey=${this?.apiKey}`
         );
         if (response.status === 200) {
           resolve("Lyrics Posted.");
         } else {
           reject(
-            new MusixmatchAPIError(this.handleStatusCode(response.status))
+            new MusixmatchAPIError(this?.handleStatusCode(response.status))
           );
         }
       } catch (e: any) {
-        this.checkError(e);
+        this?.checkError(e);
       }
     });
   }
@@ -1125,7 +1125,7 @@ class MusixmatchAPI {
 
         try {
           const response: AxiosResponse = await axios.get(
-            `https://api.musixmatch.com/ws/1.1/matcher.lyrics.get?track_id=${trackId}&apikey=${this.apiKey}`
+            `https://api.musixmatch.com/ws/1.1/matcher.lyrics.get?track_id=${trackId}&apikey=${this?.apiKey}`
           );
 
           if (response.status === 200) {
@@ -1133,11 +1133,11 @@ class MusixmatchAPI {
             resolve(lyrics);
           } else {
             reject(
-              new MusixmatchAPIError(this.handleStatusCode(response.status))
+              new MusixmatchAPIError(this?.handleStatusCode(response.status))
             );
           }
         } catch (error: any) {
-          this.checkError(error);
+          this?.checkError(error);
         }
       } else {
         const { artistName, trackName } = identifier;
@@ -1152,14 +1152,14 @@ class MusixmatchAPI {
           const response: AxiosResponse = await axios.get(
             `https://api.musixmatch.com/ws/1.1/track.search?q_artist=${encodeURIComponent(
               artistName
-            )}&q_track=${encodeURIComponent(trackName)}&apikey=${this.apiKey}`
+            )}&q_track=${encodeURIComponent(trackName)}&apikey=${this?.apiKey}`
           );
 
           if (response.status === 200) {
             const trackId: string =
               response.data?.message.body.track_list[0].track.track_id;
             const lyricsResponse: AxiosResponse = await axios.get(
-              `https://api.musixmatch.com/ws/1.1/matcher.lyrics.get?track_id=${trackId}&apikey=${this.apiKey}`
+              `https://api.musixmatch.com/ws/1.1/matcher.lyrics.get?track_id=${trackId}&apikey=${this?.apiKey}`
             );
 
             if (lyricsResponse.status === 200) {
@@ -1168,17 +1168,17 @@ class MusixmatchAPI {
             } else {
               reject(
                 new MusixmatchError(
-                  this.handleStatusCode(lyricsResponse.status)
+                  this?.handleStatusCode(lyricsResponse.status)
                 )
               );
             }
           } else {
             reject(
-              new MusixmatchAPIError(this.handleStatusCode(response.status))
+              new MusixmatchAPIError(this?.handleStatusCode(response.status))
             );
           }
         } catch (error: any) {
-          this.checkError(error);
+          this?.checkError(error);
         }
       }
     });
@@ -1209,7 +1209,7 @@ class MusixmatchAPI {
         }
         try {
           const response: AxiosResponse = await axios.get(
-            `https://api.musixmatch.com/ws/1.1/matcher.subtitles.get?track_id=${trackId}&apikey=${this.apiKey}`
+            `https://api.musixmatch.com/ws/1.1/matcher.subtitles.get?track_id=${trackId}&apikey=${this?.apiKey}`
           );
 
           if (response.status === 200) {
@@ -1217,11 +1217,11 @@ class MusixmatchAPI {
             resolve(subtitles);
           } else {
             reject(
-              new MusixmatchAPIError(this.handleStatusCode(response.status))
+              new MusixmatchAPIError(this?.handleStatusCode(response.status))
             );
           }
         } catch (error: any) {
-          this.checkError(error);
+          this?.checkError(error);
         }
       } else {
         const { artistName, trackName } = identifier;
@@ -1236,14 +1236,14 @@ class MusixmatchAPI {
           const response: AxiosResponse = await axios.get(
             `https://api.musixmatch.com/ws/1.1/track.search?q_artist=${encodeURIComponent(
               artistName
-            )}&q_track=${encodeURIComponent(trackName)}&apikey=${this.apiKey}`
+            )}&q_track=${encodeURIComponent(trackName)}&apikey=${this?.apiKey}`
           );
 
           if (response.status === 200) {
             const trackId: string =
               response.data?.message.body.track_list[0].track.track_id;
             const subtitleResponse: AxiosResponse = await axios.get(
-              `https://api.musixmatch.com/ws/1.1/matcher.subtitles.get?track_id=${trackId}&apikey=${this.apiKey}`
+              `https://api.musixmatch.com/ws/1.1/matcher.subtitles.get?track_id=${trackId}&apikey=${this?.apiKey}`
             );
 
             if (subtitleResponse.status === 200) {
@@ -1253,17 +1253,17 @@ class MusixmatchAPI {
             } else {
               reject(
                 new MusixmatchError(
-                  this.handleStatusCode(subtitleResponse.status)
+                  this?.handleStatusCode(subtitleResponse.status)
                 )
               );
             }
           } else {
             reject(
-              new MusixmatchAPIError(this.handleStatusCode(response.status))
+              new MusixmatchAPIError(this?.handleStatusCode(response.status))
             );
           }
         } catch (error: any) {
-          this.checkError(error);
+          this?.checkError(error);
         }
       }
     });
@@ -1287,17 +1287,17 @@ class MusixmatchAPI {
       }
       try {
         const response = await axios.get(
-          `https://api.musixmatch.com/ws/1.1/track.snippet.get?track_id=${trackID}&apikey=${this.apiKey}`
+          `https://api.musixmatch.com/ws/1.1/track.snippet.get?track_id=${trackID}&apikey=${this?.apiKey}`
         );
         if (response.status == 200) {
           resolve(response.data?.message.body);
         } else {
           reject(
-            new MusixmatchAPIError(this.handleStatusCode(response.status))
+            new MusixmatchAPIError(this?.handleStatusCode(response.status))
           );
         }
       } catch (error: any) {
-        this.checkError(error);
+        this?.checkError(error);
       }
     });
   }
@@ -1318,16 +1318,16 @@ class MusixmatchAPI {
       }
       try {
         const res = await axios.get(
-          `https://api.musixmatch.com/ws/1.1/track.search?q_artist=${artistName}&q_track=${trackName}`
+          `https://api.musixmatch.com/ws/1.1/track.search?q_artist=${artistName}&q_track=${trackName}&apikey=${this?.apiKey}`
         );
         if (res.status == 200) {
           const artistId = res.data?.message.body.track_list[0].track.artist_id;
           resolve(artistId);
         } else {
-          reject(new MusixmatchAPIError(this.handleStatusCode(res.status)));
+          reject(new MusixmatchAPIError(this?.handleStatusCode(res.status)));
         }
       } catch (e) {
-        this.checkError(e);
+        this?.checkError(e);
       }
     });
   }
@@ -1347,16 +1347,16 @@ class MusixmatchAPI {
       }
       try {
         const res = await axios.get(
-          `https://api.musixmatch.com/ws/1.1/artist.get?artist_id=${artistID}`
+          `https://api.musixmatch.com/ws/1.1/artist.get?artist_id=${artistID}&apikey=${this?.apiKey}`
         );
         if (res.status == 200) {
           const artistGetData = res.data?.message.body;
           resolve(artistGetData);
         } else {
-          reject(new MusixmatchAPIError(this.handleStatusCode(res.status)));
+          reject(new MusixmatchAPIError(this?.handleStatusCode(res.status)));
         }
       } catch (e) {
-        this.checkError(e);
+        this?.checkError(e);
       }
     });
   }
