@@ -1,6 +1,6 @@
 {
   "name": "musixmatch-api-node",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "A Third-Party node-module that provides access to the Musixmatch API for retrieving lyrics and other related data.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
