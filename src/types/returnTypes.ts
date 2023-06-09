@@ -16,7 +16,7 @@ type LyricsReturnType = Promise<GetLyrics | undefined>;
 type TrackIDReturnType = Promise<MusixmatchString | undefined>;
 type SubtitleReturnType = Promise<SubtitleInt | undefined>;
 type TranslationReturnType = Promise<MusixmatchString | undefined>;
-type TrackSearchRetrunType = Promise<TrackInfo | undefined>;
+type TrackSearchReturnType = Promise<TrackInfo | undefined>;
 type HasLyricsReturnType = Promise<MusixmatchBoolean | undefined>;
 type TrackGetReturnType = Promise<TrackGet | undefined>;
 type ChartArtistReturnType = Promise<ChartArtist | undefined>;
@@ -31,7 +31,7 @@ export {
   TrackIDReturnType,
   SubtitleReturnType,
   TranslationReturnType,
-  TrackSearchRetrunType,
+  TrackSearchReturnType,
   HasLyricsReturnType,
   TrackGetReturnType,
   ChartArtistReturnType,

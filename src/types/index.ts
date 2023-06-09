@@ -9,7 +9,7 @@ export {
   SubtitleReturnType,
   TrackGetReturnType,
   TrackIDReturnType,
-  TrackSearchRetrunType,
+  TrackSearchReturnType,
   TrackSnippetReturnType,
   TranslationReturnType,
 } from "./returnTypes";
