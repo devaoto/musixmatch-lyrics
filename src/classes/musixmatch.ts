@@ -25,7 +25,7 @@ import {
   TrackSearchRetrunType,
   TrackSnippetReturnType,
 } from "../types";
-import { ArtistGetReturnType } from "../types/returnTypes";
+import { AlbumGetReturnType, ArtistGetReturnType } from "../types/returnTypes";
 
 // Import Custom Error classes
 import {
@@ -1493,6 +1493,31 @@ class MusixmatchAPI {
           reject(new MusixmatchAPIError(this?.handleStatusCode(res.status)));
         }
       } catch (e) {
+        this?.checkError(e);
+      }
+    });
+  }
+
+  /**
+   * Get Album Info
+   * @param {number} albumId - The Album ID
+   * @returns {Promise<AlbumGetReturnType>}
+   */
+  async albumGet(albumId: number) {
+    return new Promise<any>(async (resolve, reject) => {
+      try {
+        const response = await axios?.get(
+          `https://api.musixmatch.com/ws/1.1/album.get?album_id=${albumId}&apikey=${this?.apiKey}`
+        );
+        if (response?.status == 200) {
+          const albumInfo = await response?.data?.message?.body?.album;
+          resolve(albumInfo);
+        } else {
+          reject(
+            new MusixmatchAPIError(this.handleStatusCode(response?.status))
+          );
+        }
+      } catch (e: any) {
         this?.checkError(e);
       }
     });

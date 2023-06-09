@@ -1,5 +1,6 @@
 export { ArtistNameType, TrackIDType, TrackNameType } from "./paramTypes";
 export {
+  AlbumGetReturnType,
   ChartArtistReturnType,
   ChartTracksReturnType,
   HasLyricsReturnType,
