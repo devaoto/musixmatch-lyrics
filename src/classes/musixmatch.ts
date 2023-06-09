@@ -25,7 +25,11 @@ import {
   TrackSearchRetrunType,
   TrackSnippetReturnType,
 } from "../types";
-import { AlbumGetReturnType, ArtistGetReturnType } from "../types/returnTypes";
+import {
+  AlbumGetReturnType,
+  AlbumTracksGetReturnType,
+  ArtistGetReturnType,
+} from "../types/returnTypes";
 
 // Import Custom Error classes
 import {
@@ -1504,7 +1508,7 @@ class MusixmatchAPI {
    * @returns {Promise<AlbumGetReturnType>}
    */
   async albumGet(albumId: number) {
-    return new Promise<any>(async (resolve, reject) => {
+    return new Promise<AlbumGetReturnType>(async (resolve, reject) => {
       try {
         const response = await axios?.get(
           `https://api.musixmatch.com/ws/1.1/album.get?album_id=${albumId}&apikey=${this?.apiKey}`
@@ -1512,6 +1516,57 @@ class MusixmatchAPI {
         if (response?.status == 200) {
           const albumInfo = await response?.data?.message?.body?.album;
           resolve(albumInfo);
+        } else {
+          reject(
+            new MusixmatchAPIError(this.handleStatusCode(response?.status))
+          );
+        }
+      } catch (e: any) {
+        this?.checkError(e);
+      }
+    });
+  }
+  /**
+   * Get Album Tracks
+   * @param {number} albumId - The Album ID
+   * @param {number} page - The amount of pages
+   * @param {number} pageSize - The page size
+   * @returns {Promise<AlbumTracksGetReturnType>} album tracks.
+   */
+  async albumTracksGet(
+    albumId: number,
+    page: number | undefined = 1,
+    pageSize: number | undefined = 1
+  ) {
+    return new Promise<AlbumTracksGetReturnType>(async (resolve, reject) => {
+      try {
+        if (typeof albumId !== "number") {
+          throw new MusixmatchTypeError(
+            "Expected type of album id to be number but got",
+            typeof albumId,
+            "instead."
+          );
+        }
+        if (typeof page !== "number") {
+          throw new MusixmatchTypeError(
+            "Expected type of page to be number but got",
+            typeof page,
+            "instead."
+          );
+        }
+        if (typeof pageSize !== "number") {
+          throw new MusixmatchTypeError(
+            'Expected type of album id to be "number" but got',
+            `"${typeof pageSize}"`,
+            "instead."
+          );
+        }
+        const response = await axios?.get(
+          `https://api.musixmatch.com/ws/1.1/album.tracks.get?album_id=${albumId}&page=${page}&page_size=${pageSize}&apikey=${this?.apiKey}`
+        );
+        if (response?.status == 200) {
+          const albumTracks = response?.data?.message?.body;
+          resolve(albumTracks);
         } else {
           reject(
             new MusixmatchAPIError(this.handleStatusCode(response?.status))
