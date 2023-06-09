@@ -1466,6 +1466,37 @@ class MusixmatchAPI {
       }
     });
   }
+  /**
+   * Get AlbumID with track name and artist name.
+   * @param {TrackNameType} trackName - The track name
+   * @param {ArtistNameType} artistName - The Artist Name
+   * @returns {Promise<number>} album id
+   */
+  async getAlbumId(trackName: TrackNameType, artistName: ArtistNameType) {
+    return new Promise<number>(async (resolve, reject) => {
+      if (typeof artistName !== "string" || typeof trackName !== "string") {
+        reject(
+          new MusixmatchTypeError(
+            `Expected artistName and trackName to be of type "string" but got ${typeof artistName} and ${typeof trackName} instead.`
+          )
+        );
+      }
+      try {
+        const res = await axios?.get(
+          `https://api.musixmatch.com/ws/1.1/track.search?q_artist=${artistName}&q_track=${trackName}&apikey=${this?.apiKey}`
+        );
+        if (res.status == 200) {
+          const artistId =
+            res.data?.message?.body?.track_list[0]?.track?.album_id;
+          resolve(artistId);
+        } else {
+          reject(new MusixmatchAPIError(this?.handleStatusCode(res.status)));
+        }
+      } catch (e) {
+        this?.checkError(e);
+      }
+    });
+  }
 }
 
 export { MusixmatchAPI };
