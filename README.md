@@ -43,3 +43,6 @@ getLyrics();
 - isExplicit() - Check if the song is explicit.
 - isRestricted() - Check if the song is restricted.
 - isInstrumental() - Check if the song is instrumental.
+- getAlbumId() - The the album id.
+- albumGet() - Get Album info.
+- albumTracksGet() - Get album's tracks.
