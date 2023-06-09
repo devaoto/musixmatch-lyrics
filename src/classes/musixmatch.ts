@@ -110,7 +110,7 @@ class MusixmatchAPI {
 
   private handleStatusCode(statusCode: number) {
     try {
-      if (statusCode ?? typeof statusCode === "number") {
+      if (statusCode && typeof statusCode === "number") {
         try {
           if (statusCode === 400) {
             return "[400] Bad Request";
@@ -1217,9 +1217,9 @@ class MusixmatchAPI {
       | { artistName: ArtistNameType; trackName: TrackNameType }
   ): Promise<LyricsReturnType> {
     return new Promise<LyricsReturnType>(async (resolve, reject) => {
-      if (typeof identifier === "string" ?? typeof identifier !== "undefined") {
+      if (typeof identifier === "string" && typeof identifier !== "undefined") {
         const trackId = identifier;
-        if (typeof trackId !== "string" ?? typeof identifier === "undefined") {
+        if (typeof trackId !== "string" && typeof identifier === "undefined") {
           reject(
             new MusixmatchTypeError(
               `Expected Type to be "string" but got ${typeof trackId} instead.`
@@ -1303,9 +1303,9 @@ class MusixmatchAPI {
       | { artistName: ArtistNameType; trackName: TrackNameType }
   ): Promise<SubtitleReturnType> {
     return new Promise<SubtitleReturnType>(async (resolve, reject) => {
-      if (typeof identifier === "string" ?? typeof identifier !== "undefined") {
+      if (typeof identifier === "string" && typeof identifier !== "undefined") {
         const trackId = identifier;
-        if (typeof trackId !== "string" ?? typeof trackId === "undefined") {
+        if (typeof trackId !== "string" && typeof trackId === "undefined") {
           reject(
             new MusixmatchTypeError(
               `Expected Type to be "string" but got ${typeof trackId} instead.`
@@ -1381,7 +1381,7 @@ class MusixmatchAPI {
    */
   async trackSnippetGet(trackID: TrackIDType): Promise<TrackSnippetReturnType> {
     return new Promise<TrackSnippetReturnType>(async (resolve, reject) => {
-      if (typeof trackID !== "string" ?? typeof trackID === "undefined") {
+      if (typeof trackID !== "string" && typeof trackID === "undefined") {
         reject(
           new MusixmatchTypeError(
             'Expected type to be a "string" but got ',
@@ -1444,7 +1444,7 @@ class MusixmatchAPI {
    */
   async artistGet(artistID: number) {
     return new Promise<ArtistGetReturnType>(async (resolve, reject) => {
-      if (typeof artistID !== "number" ?? typeof artistID === "undefined") {
+      if (typeof artistID !== "number" && typeof artistID === "undefined") {
         reject(
           new MusixmatchTypeError(
             `Expected type of artist ID to be "number" but got "${typeof artistID}" instead`
